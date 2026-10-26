@@ -1,0 +1,36 @@
+# Fund registry - the skill's ONLY user-specific data. Keep real values in the
+# VAULT copy (<ledger>/funds.yaml); this bundled example is synthetic.
+# Resolution: $FUNDS_REGISTRY -> <ledger>/funds.yaml -> this file (first hit wins;
+# an explicit env path that is missing is a LOUD error, never a silent fallback).
+#
+# Per-fund fields:
+#   code            short code, also the series filename <code>.jsonl
+#   product_id      numeric Fmarket product id (from POST /res/products/filter)
+#   short_name      display name in Funds.md
+#   asset_type      STOCK | BOND | BALANCED | MMF (informational)
+#   avg_cost_nav    your book average NAV - thresholds recompute from THIS when
+#                   you buy more (update it after every purchase)
+#   units           your holding (units x NAV = current value)
+#   cap_value       portfolio cap - reaching it forces the diversification decision
+#   dca             amount + day-of-month windows (reminder-only; you place orders)
+#   buy_more_thresholds  drop_pct vs avg_cost_nav + amount to add
+#                   (same-month dedupe is engine behavior: one alert per tier per month)
+#   no_sell_before  holding-window date (informational guard)
+
+funds:
+  - code: EXMP                # synthetic example - replace or shadow vault-side
+    product_id: 99999
+    short_name: Example Equity Fund
+    asset_type: STOCK
+    avg_cost_nav: 100000.00
+    units: 50.00
+    cap_value: 9999999
+    dca:
+      amount: 1000000
+      days: [7, 8]
+    buy_more_thresholds:
+      - drop_pct: 10
+        amount: 1000000
+      - drop_pct: 17
+        amount: 2000000
+    no_sell_before: "2028-02-01"

@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "code": 200,
+  "message": "Thành công",
+  "data": [
+    {"id": 1, "createdAt": 1700000000000, "nav": 12345.67, "navDate": "2026-10-01", "productId": 99999},
+    {"id": 2, "createdAt": 1700086400000, "nav": 12350.11, "navDate": "2026-10-02", "productId": 99999}
+  ],
+  "extra": {"clientCode": "web"}
+}
